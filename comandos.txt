@@ -1,0 +1,28 @@
+npm create astro@latest
+    nombre proyecto
+How would you like to start your new project?
+         Include sample files
+
+    ts   Do you plan to write TypeScript?
+         Yes
+
+   use   How strict should TypeScript be?
+         Strict
+
+  deps   Install dependencies?
+         Yes
+
+   git   Initialize a new git repository?
+         Yes
+
+carpeta components borrar
+en Index.astro hay que borrar la etiqueta main
+
+npm install astro-cloudinary
+
+npm i fulldev-ui
+
+npm i --save-dev two-up-element
+
+crear un archivo .env y agregar esta linea
+PUBLIC_CLOUDINARY_CLOUD_NAME="cloud_name"
