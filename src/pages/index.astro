@@ -10,7 +10,7 @@ import Button from "fulldev-ui/components/Button.astro";
     <Heading color="brand" contrast={false}> Welcome to Astro </Heading>
     <CldUploadWidget
       id="upload-widget"
-      uploadPreset="Halloween"
+      uploadPreset="halloween"
       options={{
         sources: ["local"],
         multiple: false,
@@ -20,6 +20,18 @@ import Button from "fulldev-ui/components/Button.astro";
     >
       <Button color="brand" as="button">Upload</Button>
     </CldUploadWidget>
+    <CldUploadWidget
+      id="upload-CldImage"
+      uploadPreset="halloween"
+      options={{
+        sources: ["local"],
+        multiple: false,
+        maxFiles: 1,
+        language: "es",
+      }}
+    >
+      <Button color="brand" as="button">CldImage</Button>
+    </CldUploadWidget>
   </main>
 </Layout>
 
@@ -27,6 +39,7 @@ import Button from "fulldev-ui/components/Button.astro";
   import { navigate } from "astro:transitions/client";
 
   const widget = document.getElementById("upload-widget");
+  const CldImag = document.getElementById("upload-CldImage");
 
   if (widget) {
     widget.addEventListener("clduploadwidget:success", ((
@@ -36,6 +49,17 @@ import Button from "fulldev-ui/components/Button.astro";
       const publicId = e.detail.info.public_id;
 
       navigate(`/photo?id=${publicId}`);
+    }) as EventListener);
+  }
+
+  if (CldImag) {
+    CldImag.addEventListener("clduploadwidget:success", ((
+      e: CustomEvent<{ info: { public_id: string } }>
+    ) => {
+      // console.log('clduploadwidget:success', e.detail);
+      const publicId = e.detail.info.public_id;
+
+      navigate(`/photoCld?id=${publicId}`);
     }) as EventListener);
   }
 </script>

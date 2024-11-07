@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCldImageUrl } from "astro-cloudinary/helpers";
+import Heading from "fulldev-ui/components/Heading.astro";
+import { CldImage } from "astro-cloudinary";
+
+const { searchParams } = Astro.url;
+const id = searchParams.get("id");
+
+if(id === null){
+	return Astro.redirect("/");
+}
+
+const url = getCldImageUrl({ src:id})
+console.log(id, url);
+---
+
+<Layout title="Welcome to Astro.">
+	<main data-id={id}>
+    <header>
+      <Heading color="brand" contrast={false}> Modificaciones con CldImage </Heading>
+      <CldImage
+        src={id}
+        blur="1000"
+      >
+      </CldImage>
+      <CldImage
+        src={id}
+        angle={20}
+      >
+      </CldImage>
+      <CldImage
+        src={id}
+        crop={{
+          width: 1200,
+          height: 1200,
+          type: 'thumb',
+          source: true
+        }}
+      >
+      </CldImage>
+      <CldImage
+        src={id}
+        grayscale
+      >
+      </CldImage>
+    </header>
+    <small>{url}</small>
+	</main>
+</Layout>
+
+<!-- http://localhost:4321/photo?id=nfkuhsrwtl1kkqaova1x -->
+<!-- http://localhost:4321/photo?id=e52nnnclj5yljftbmqu9 -->
+
+<style>
+  main {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 100px;
+    text-align: center;
+  }
+  img{
+    display: inline-block;
+    max-width: 45%;
+    height: auto;
+    border-radius: 12px;
+    transition: opacity 0.3s ease-in-out;
+    padding: 10px;
+  }
+</style>
